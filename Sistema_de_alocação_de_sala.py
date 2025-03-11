@@ -2,7 +2,6 @@ import pandas as pd
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-# Definição das salas e horários
 salas = list(range(401, 417))
 horarios = {
     1: "7:30 - 8:20", 2: "8:20 - 09:10", 3: "09:20 - 10:10", 
@@ -13,11 +12,9 @@ horarios_dataframe = list(horarios.values())
 df = pd.DataFrame("🔘", index=salas, columns=horarios_dataframe)
 df.index.name = "Salas"
 
-# Função para listar salas livres
 def listar_salas_livres(horario):
     return df[df[horario] == "🔘"].index.tolist()
 
-# Função para alocar sala
 def alocar():
     horario = combo_horario.get()
     if not horario:
@@ -48,7 +45,6 @@ def alocar():
     atualizar_tabela()
     messagebox.showinfo("Sucesso", f"Sala {sala} alocada para {nome} ({disciplina})!")
 
-# Função para atualizar a tabela
 def atualizar_tabela():
     for row in tree.get_children():
         tree.delete(row)
@@ -57,10 +53,9 @@ def atualizar_tabela():
         valores = [sala] + list(df.loc[sala])
         tree.insert("", "end", values=valores)
 
-# Interface Gráfica
 top = tk.Tk()
 top.title("Sistema de Alocação de Salas")
-top.geometry("1600x900")  # Aumentando o tamanho da janela
+top.geometry("1600x900")
 
 tk.Label(top, text="Professor:", font=("Arial", 14)).grid(row=0, column=0, padx=10, pady=5)
 entry_professor = tk.Entry(top, font=("Arial", 14), width=20)
@@ -78,15 +73,14 @@ tk.Label(top, text="Horário:", font=("Arial", 14)).grid(row=3, column=0, padx=1
 combo_horario = ttk.Combobox(top, values=horarios_dataframe, font=("Arial", 14), width=18)
 combo_horario.grid(row=3, column=1, padx=10, pady=5)
 
-btn_alocar = tk.Button(top, text="Alocar", font=("Arial", 14, "bold"), command=alocar,)
+btn_alocar = tk.Button(top, text="Alocar", font=("Arial", 14, "bold"), command=alocar)
 btn_alocar.grid(row=4, column=0, columnspan=2, pady=10)
 
-# Tabela
 columns = ["Sala"] + horarios_dataframe
 tree = ttk.Treeview(top, columns=columns, show="headings")
 for col in columns:
     tree.heading(col, text=col)
-    tree.column(col, width=150)  # Aumentando a largura das colunas
+    tree.column(col, width=150)
 
 tree.grid(row=5, column=0, columnspan=3, padx=10, pady=10)
 atualizar_tabela()
