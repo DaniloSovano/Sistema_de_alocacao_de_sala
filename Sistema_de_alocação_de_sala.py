@@ -68,4 +68,4 @@ except ValueError:
 
 # Exibir tabela formatada com tabulate, garantindo alinhamento
 print("\n**Tabela de Alocação de Salas:**")
-print(tabulate(df, headers="keys", tablefmt="fancy_grid", showindex="always"))
+print(tabulate(df, headers="keys", tablefmt="fancy_grid", showindex="always")) 
