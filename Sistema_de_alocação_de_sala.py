@@ -11,7 +11,7 @@ df.index.name = "Salas"
 def listar_salas_livres(horario):
     """Lista as salas disponíveis para um determinado horário."""
     if horario not in df.columns:
-        print("❌ Horário inválido!")
+        print("Horário inválido!")
         return []
     
     salas_livres = df[df[horario] == "-"].index.tolist()
@@ -35,7 +35,7 @@ def alocar(horario):
         sala = int(input("Digite o número da sala para alocar: "))
         
         if sala not in salas_livres:
-            print("❌ Sala inválida ou já ocupada!")
+            print("Sala inválida ou já ocupada!")
             return
         
         nome = input("Digite o nome do professor: ")
@@ -45,7 +45,7 @@ def alocar(horario):
         print(f"✅ Sala {sala} alocada no horário {horario} para {nome} ({disciplina})!")
     
     except ValueError:
-        print("❌ Entrada inválida! Digite um número válido.")
+        print("Entrada inválida! Digite um número válido.")
 
 horarios = {
     1: "7:30 - 8:20", 2: "8:20 - 09:10", 3: "09:20 - 10:10", 
@@ -62,9 +62,9 @@ try:
     if escolha_horario in horarios:
         alocar(horarios[escolha_horario])
     else:
-        print("❌ Opção inválida!")
+        print("Opção inválida!")
 except ValueError:
-    print("❌ Entrada inválida! Digite um número válido.")
+    print("Entrada inválida! Digite um número válido.")
 
 # Exibir tabela formatada com tabulate, garantindo alinhamento
 print("\n📌 **Tabela de Alocação de Salas:**")
