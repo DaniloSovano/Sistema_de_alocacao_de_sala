@@ -29,9 +29,13 @@ def alocar():
         messagebox.showwarning("Aviso", "Nenhuma sala disponível neste horário!")
         return
     
-    sala = int(entry_sala.get())
-    if sala not in salas_livres:
-        messagebox.showerror("Erro", "Sala inválida ou já ocupada!")
+    try:
+        sala = int(entry_sala.get())
+        if sala not in salas_livres:
+            messagebox.showerror("Erro", "Sala inválida ou já ocupada!")
+            return
+    except ValueError:
+        messagebox.showerror("Erro", "Digite um número válido para a sala!")
         return
     
     nome = entry_professor.get()
@@ -56,35 +60,35 @@ def atualizar_tabela():
 # Interface Gráfica
 top = tk.Tk()
 top.title("Sistema de Alocação de Salas")
-top.geometry("800x400")
+top.geometry("1600x900")  # Aumentando o tamanho da janela
 
-tk.Label(top, text="Professor:").grid(row=0, column=0)
-entry_professor = tk.Entry(top)
-entry_professor.grid(row=0, column=1)
+tk.Label(top, text="Professor:", font=("Arial", 14)).grid(row=0, column=0, padx=10, pady=5)
+entry_professor = tk.Entry(top, font=("Arial", 14), width=20)
+entry_professor.grid(row=0, column=1, padx=10, pady=5)
 
-tk.Label(top, text="Disciplina:").grid(row=1, column=0)
-entry_disciplina = tk.Entry(top)
-entry_disciplina.grid(row=1, column=1)
+tk.Label(top, text="Disciplina:", font=("Arial", 14)).grid(row=1, column=0, padx=10, pady=5)
+entry_disciplina = tk.Entry(top, font=("Arial", 14), width=20)
+entry_disciplina.grid(row=1, column=1, padx=10, pady=5)
 
-tk.Label(top, text="Sala:").grid(row=2, column=0)
-entry_sala = tk.Entry(top)
-entry_sala.grid(row=2, column=1)
+tk.Label(top, text="Sala:", font=("Arial", 14)).grid(row=2, column=0, padx=10, pady=5)
+entry_sala = tk.Entry(top, font=("Arial", 14), width=10)
+entry_sala.grid(row=2, column=1, padx=10, pady=5)
 
-tk.Label(top, text="Horário:").grid(row=3, column=0)
-combo_horario = ttk.Combobox(top, values=horarios_dataframe)
-combo_horario.grid(row=3, column=1)
+tk.Label(top, text="Horário:", font=("Arial", 14)).grid(row=3, column=0, padx=10, pady=5)
+combo_horario = ttk.Combobox(top, values=horarios_dataframe, font=("Arial", 14), width=18)
+combo_horario.grid(row=3, column=1, padx=10, pady=5)
 
-btn_alocar = tk.Button(top, text="Alocar", command=alocar)
-btn_alocar.grid(row=4, column=0, columnspan=2)
+btn_alocar = tk.Button(top, text="Alocar", font=("Arial", 14, "bold"), command=alocar,)
+btn_alocar.grid(row=4, column=0, columnspan=2, pady=10)
 
 # Tabela
 columns = ["Sala"] + horarios_dataframe
 tree = ttk.Treeview(top, columns=columns, show="headings")
 for col in columns:
     tree.heading(col, text=col)
-    tree.column(col, width=100)
+    tree.column(col, width=150)  # Aumentando a largura das colunas
 
-tree.grid(row=5, column=0, columnspan=3)
+tree.grid(row=5, column=0, columnspan=3, padx=10, pady=10)
 atualizar_tabela()
 
 top.mainloop()
