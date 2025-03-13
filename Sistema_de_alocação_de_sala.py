@@ -54,15 +54,14 @@ def alocar(dia):
 
         horarios_selecionados = [horarios[h] for h in escolha_horarios]
 
-        salas_livres = set(df.index)
-        for horario in horarios_selecionados:
-            salas_livres.intersection_update(df[df[horario] == "-"].index.tolist())
+        filtro = (df[horarios_selecionados] == "-").all(axis=1)
+        salas_livres = df.query(filtro).index.tolist()
 
         if not salas_livres:
             print("Nenhuma sala está disponível para todos os horários selecionados.")
             return
 
-        print(f"\nSalas disponíveis para os horários escolhidos: {sorted(salas_livres)}")
+        print(f"\nSalas disponíveis para os horários escolhidos: {', '.join(map(str, salas_livres))}")
 
         sala = int(input("\nDigite o número da sala para alocar: "))
         if sala not in salas_livres:
@@ -85,6 +84,7 @@ def alocar(dia):
 
     except ValueError:
         print("Entrada inválida! Digite números separados por espaço.")
+
 
 def exibir_horarios(dia):
     df = tabelas[dia]
