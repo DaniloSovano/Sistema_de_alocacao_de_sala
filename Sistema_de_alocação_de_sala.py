@@ -186,6 +186,60 @@ def escolher_dia():
     except (ValueError, KeyError):
         print("Entrada inválida! Digite um número válido.")
         return None
+    
+def consultar_salas_disponiveis(dia):
+    limpar_tela()
+    print(f"\nConsulta de salas disponíveis para {dia}\n")
+
+    df = tabelas[dia]
+
+    print("\nHorários disponíveis:")
+    for key, value in horarios.items():
+        print(f"{key} - {value}")
+
+    try:
+        escolha_horario = int(input("\nDigite o número do horário desejado: "))
+
+        if escolha_horario not in horarios:
+            print("Horário inválido!")
+            return
+        
+        horario_selecionado = horarios[escolha_horario]
+
+        # Filtrar as salas que estão livres ("-") no horário escolhido
+        salas_disponiveis = df[df[horario_selecionado] == "-"].index.tolist()
+
+        if salas_disponiveis:
+            print("\nSalas disponíveis nesse horário:")
+            print(", ".join(map(str, salas_disponiveis)))
+        else:
+            print("\nNenhuma sala está disponível nesse horário.")
+
+    except ValueError:
+        print("Entrada inválida! Digite um número correspondente ao horário.")
+
+def exibir_reservas_professor():
+    limpar_tela()
+    nome_professor = input("Digite o nome do professor: ").strip()
+
+    if not nome_professor:
+        print("Nome inválido!")
+        return
+
+    encontrou_reservas = False
+
+    print(f"\nReservas para o professor {nome_professor}:\n")
+
+    for dia, df in tabelas.items():
+        for sala in df.index:
+            for horario, reserva in df.loc[sala].items():
+                if reserva.startswith(nome_professor):  # Verifica se a reserva começa com o nome do professor
+                    print(f"{dia} - Sala {sala} - {horario}: {reserva}")
+                    encontrou_reservas = True
+
+    if not encontrou_reservas:
+        print(f"\nNenhuma reserva encontrada para {nome_professor}.")
+
 
 def menu():
     while True:
@@ -217,10 +271,11 @@ def menu():
             alterar_locacao(dia)
             
         elif opcao == "4":
-            print("Função ainda não implementada.")
+            dia = escolher_dia()
+            consultar_salas_disponiveis(dia)
 
         elif opcao == "5":
-            print("Função ainda não implementada.")
+            exibir_reservas_professor()
 
         elif opcao == "6":
             salvar_dados()
