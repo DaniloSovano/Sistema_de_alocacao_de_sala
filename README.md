@@ -22,13 +22,13 @@ pip install pandas openpyxl tabulate
 
 Após executar o programa, você verá um menu com as seguintes opções:
 
-1️⃣ **Ver todas as salas** → Exibe a alocação de todas as salas.
-2️⃣ **Alocar Sala** → Permite reservar uma sala para um professor.
-3️⃣ **Alterar ou Remover locação** → Modifica ou exclui uma reserva existente.
-4️⃣ **Consultar salas disponíveis** → Mostra quais salas estão livres em determinado horário.
-5️⃣ **Exibir reservas de um professor** → Lista todas as reservas de um professor específico.
-6️⃣ **Exportar reservas para XLSX** → Salva todas as reservas no arquivo `salas_reservadas.xlsx`.
-7️⃣ **Sair** → Encerra o sistema.
+1️⃣ **Ver todas as salas** → Exibe a alocação de todas as salas. <br>
+2️⃣ **Alocar Sala** → Permite reservar uma sala para um professor.<br>
+3️⃣ **Alterar ou Remover locação** → Modifica ou exclui uma reserva existente.<br>
+4️⃣ **Consultar salas disponíveis** → Mostra quais salas estão livres em determinado horário.<br>
+5️⃣ **Exibir reservas de um professor** → Lista todas as reservas de um professor específico.<br>
+6️⃣ **Exportar reservas para XLSX** → Salva todas as reservas no arquivo `salas_reservadas.xlsx`.<br>
+7️⃣ **Sair** → Encerra o sistema.<br>
 
 ## 📂 Formato do Arquivo de Dados
 
