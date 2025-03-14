@@ -206,7 +206,6 @@ def consultar_salas_disponiveis(dia):
         
         horario_selecionado = horarios[escolha_horario]
 
-        # Filtrar as salas que estão livres ("-") no horário escolhido
         salas_disponiveis = df[df[horario_selecionado] == "-"].index.tolist()
 
         if salas_disponiveis:
@@ -233,7 +232,7 @@ def exibir_reservas_professor():
     for dia, df in tabelas.items():
         for sala in df.index:
             for horario, reserva in df.loc[sala].items():
-                if reserva.startswith(nome_professor):  # Verifica se a reserva começa com o nome do professor
+                if reserva.startswith(nome_professor):  
                     print(f"{dia} - Sala {sala} - {horario}: {reserva}")
                     encontrou_reservas = True
 
@@ -287,5 +286,6 @@ def menu():
 
         else:
             print("Opção inválida! Escolha novamente.")
+
 
 menu()
