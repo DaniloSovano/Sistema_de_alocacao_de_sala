@@ -1,4 +1,5 @@
 import os
+import time
 import pandas as pd
 from tabulate import tabulate  
 
@@ -24,7 +25,7 @@ def salvar_dados():
     with pd.ExcelWriter(ARQUIVO_XLSX, engine="openpyxl") as writer:
         for dia, df in tabelas.items():
             df.to_excel(writer, sheet_name=dia)
-    print(f"📁 Dados salvos em {ARQUIVO_XLSX}")
+    print(f"Dados salvos em {ARQUIVO_XLSX}")
 
 tabelas = carregar_dados()
 
@@ -256,9 +257,9 @@ def menu():
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
-            dia = escolher_dia()
-            if dia:
+            for dia in dias_da_semana:
                 exibir_horarios(dia)
+                time.sleep(3)
 
         elif opcao == "2":
             dia = escolher_dia()
