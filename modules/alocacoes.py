@@ -56,7 +56,7 @@ def alocar(dia):
 
         salvar_dados()  
 
-        print(f"\n✅ Sala {sala} alocada para {nome} ({disciplina}) nos horários:")
+        print(f"\n Sala {sala} alocada para {nome} ({disciplina}) nos horários:")
         for horario in horarios_selecionados:
             print(f"  - {horario}")
 
