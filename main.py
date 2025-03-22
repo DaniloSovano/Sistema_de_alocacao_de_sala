@@ -37,7 +37,8 @@ def menu():
             
         elif opcao == "4":
             dia = escolher_dia()
-            consultar_salas_disponiveis(dia)
+            if dia:
+                consultar_salas_disponiveis(dia)
 
         elif opcao == "5":
             exibir_reservas_professor()
