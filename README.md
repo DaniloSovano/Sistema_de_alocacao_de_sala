@@ -15,7 +15,7 @@ Este é um sistema simples para alocação e gerenciamento de salas em uma insti
 Antes de executar o projeto, certifique-se de ter o Python instalado e as seguintes bibliotecas:
 
 ```sh
-pip install pandas openpyxl tabulate
+pip install pandas openpyxl rich
 ```
 
 ## 📖 Como Usar
